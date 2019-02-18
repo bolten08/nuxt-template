@@ -1,5 +1,7 @@
 <template>
     <div>
+        <Header />
+
         <section class="container">
             <div>
                 <logo />
@@ -29,10 +31,12 @@
 
 <script>
     import Logo from '~/components/common/Logo.vue';
+    import Header from '~/components/common/Header.vue';
 
     export default {
         components: {
             Logo,
+            Header,
         }
     };
 </script>

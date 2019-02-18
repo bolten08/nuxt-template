@@ -1,4 +1,3 @@
-const pkg = require('./package');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 require('dotenv').config();
 
@@ -9,7 +8,7 @@ module.exports = {
      ** Headers of the page
      */
     head: {
-        title: pkg.name,
+        title: 'Nuxt Template',
         meta: [
             { charset: 'utf-8' },
             {
@@ -19,7 +18,7 @@ module.exports = {
             {
                 hid: 'description',
                 name: 'description',
-                content: pkg.description
+                content: 'Nuxt Template'
             }
         ],
         link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
@@ -33,7 +32,10 @@ module.exports = {
     /*
      ** Global CSS
      */
-    css: ['~/assets/styles/vendors', '~/assets/styles/main'],
+    css: [
+        '~/assets/styles/vendors',
+        '~/assets/styles/main'
+    ],
 
     /*
      ** Plugins to load before mounting the App

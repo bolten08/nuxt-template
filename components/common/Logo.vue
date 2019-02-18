@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<style>
+<style lang="postcss">
 .VueToNuxtLogo {
     display: inline-block;
     animation: turn 2s linear forwards 1s;
