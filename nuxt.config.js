@@ -37,6 +37,10 @@ module.exports = {
         '~/assets/styles/main'
     ],
 
+    styleResources: {
+        scss: '~/assets/styles/shared/*.scss'
+    },
+
     /*
      ** Plugins to load before mounting the App
      */
@@ -80,9 +84,6 @@ module.exports = {
         postcss: {
             // Add plugin names as key and arguments as value
             // Install them before as dependencies with npm or yarn
-            plugins: {
-                precss: true
-            },
             preset: {
                 // Change the postcss-preset-env settings
                 autoprefixer: {
@@ -101,7 +102,7 @@ module.exports = {
 
                 config.plugins.push(
                     new StyleLintPlugin({
-                        files: ['**/*.pcss', '**/*.vue'],
+                        files: ['**/*.scss', '**/*.vue'],
                         failOnError: false,
                         quiet: false
                     })

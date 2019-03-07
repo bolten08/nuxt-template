@@ -33,6 +33,8 @@
         "vue/html-indent": "off",
         "vue/max-attributes-per-line": "off",
         "vue/html-self-closing": "off",
-        "vue/require-default-prop": "off"
+        "vue/require-default-prop": "off",
+        "vue/no-v-html": "off",
+        "vue/multiline-html-element-content-newline": "off"
     }
 }
