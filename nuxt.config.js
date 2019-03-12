@@ -65,7 +65,8 @@ module.exports = {
      */
     modules: [
         '@nuxtjs/dotenv',
-        '@nuxtjs/axios'
+        '@nuxtjs/axios',
+        '@nuxtjs/style-resources',
     ],
     /*
      ** Axios module configuration
@@ -81,16 +82,6 @@ module.exports = {
         /*
          ** You can extend webpack config here
          */
-        postcss: {
-            // Add plugin names as key and arguments as value
-            // Install them before as dependencies with npm or yarn
-            preset: {
-                // Change the postcss-preset-env settings
-                autoprefixer: {
-                    grid: true
-                }
-            }
-        },
         extend(config, ctx) {
             if (ctx.isDev && ctx.isClient) {
                 config.module.rules.push({
