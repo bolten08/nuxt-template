@@ -30,6 +30,16 @@
     }
 }
 
+@mixin font($alias, $name, $weight) {
+    @font-face {
+        font-family: $alias;
+        src: url('~assets/fonts/' + $name + '.woff') format('woff');
+        font-weight: $weight;
+        font-style: normal;
+        font-display: swap;
+    }
+}
+
 @function breakpoint-max($name, $bp: $breakpoints) {
     $next: breakpoint-next($name, $bp);
 
