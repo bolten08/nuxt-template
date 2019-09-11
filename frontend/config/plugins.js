@@ -1,5 +1,5 @@
 export const plugins = [
-    '~engine/engine.js',
+    '~ui/ui.js',
     '~plugins/filters',
     '~plugins/axios',
     '~plugins/api',
