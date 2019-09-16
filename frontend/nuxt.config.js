@@ -62,7 +62,7 @@ module.exports = {
      */
     css: [
         '~/assets/scss/vendors.scss',
-        '~/assets/scss/main.scss',
+        '~/assets/scss/common.scss',
     ],
 
     styleResources: {
