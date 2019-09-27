@@ -1,6 +1,6 @@
 import pkg from './package';
-import path from 'path';
-import fs from 'fs';
+// import path from 'path';
+// import fs from 'fs';
 
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 require('dotenv').config();
@@ -11,16 +11,12 @@ import {plugins} from './config/plugins';
 module.exports = {
     mode: 'universal',
 
-    // env: {
-    //     frontendUrl: process.env.FRONTEND_URL,
-    // },
-
-    server: process.env.HTTPS_KEY && process.env.HTTPS_CERT ? {
-        https: {
-            key: fs.readFileSync(path.resolve(__dirname, process.env.HTTPS_KEY)),
-            cert: fs.readFileSync(path.resolve(__dirname, process.env.HTTPS_CERT)),
-        },
-    } : {},
+    /**
+     * frontendUrl используется при составлении абсолютного адреса для кнопок "поделиться"
+     */
+    env: {
+        frontendUrl: process.env.FRONTEND_URL,
+    },
 
     render: {
         http2: {
@@ -28,55 +24,64 @@ module.exports = {
         },
     },
 
-    /*
-     ** Headers of the page
+    /**
+     * Метатеги, фавиконки и т.п
+     * Для генерации фавиконок - https://realfavicongenerator.net/
      */
     head: {
+        htmlAttrs: {
+            lang: 'ru',
+        },
         title: pkg.name,
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
             {hid: 'description', name: 'description', content: pkg.description},
             // Favicons
-            // {name: 'msapplication-TileColor', content: '#ffffff'},
-            // {name: 'theme-color', content: '#ffffff'},
+            {name: 'msapplication-TileColor', content: '#ffffff'},
+            {name: 'theme-color', content: '#ffffff'},
         ],
         link: [
             // Favicons
-            // {rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico'},
-            // {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png'},
-            // {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicons/favicon-16x16.png'},
-            // {rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png'},
-            // {rel: 'manifest', href: '/favicons/site.webmanifest'},
-            // {rel: 'mask-icon', href: '/favicons/safari-pinned-tab.svg', color: '#000000'},
+            {rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico'},
+            {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png'},
+            {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicons/favicon-16x16.png'},
+            {rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png'},
+            {rel: 'manifest', href: '/favicons/site.webmanifest'},
+            {rel: 'mask-icon', href: '/favicons/safari-pinned-tab.svg', color: '#000000'},
         ],
     },
 
-    /*
-     ** Customize the progress-bar color
+    /**
+     * Кастомизация прогрес бара. Можно передать свой кастомный компонент
+     * Подробнее смотри тут https://nuxtjs.org/api/configuration-loading#using-a-custom-loading-component
+     * и тут https://nuxtjs.org/examples/custom-loading
      */
     loading: {color: '#000'},
 
-    /*
-     ** Global CSS
+    /**
+     * Подключаем файл с вендорными стилями и файл с общими стилями
      */
     css: [
         '~/assets/scss/vendors.scss',
         '~/assets/scss/common.scss',
     ],
 
+    /**
+     * Миксины и переменные доступны во всех компонентам и во всех scss файлах
+     */
     styleResources: {
         scss: '~/assets/scss/shared/*.scss',
     },
 
-    /*
-     ** Plugins to load before mounting the App
+    /**
+     * Плагины. Вынесены в отдельеный файл
      */
     plugins,
 
-    /*
-    ** Nuxt.js modules
-    */
+    /**
+     * Модули
+     */
     modules: [
         '@nuxtjs/dotenv',
         '@nuxtjs/axios',
@@ -84,26 +89,35 @@ module.exports = {
         '@nuxtjs/style-resources',
     ],
 
+    /**
+     * В настройках роутера меняет классы для активных ссылок
+     */
     router: {
         linkActiveClass: '_active-link',
         linkExactActiveClass: '_exact-link',
     },
 
+    /**
+     * Модуль аксиоса используется для работы с апи на удаленном бекенде. Для этого дополнительно
+     * настраиваем проксирование запросов. (https://github.com/nuxt-community/axios-module#options)
+     * В продакшене при ssr запросу будут идти в docker контейнер с беком
+     */
     axios: {
-        // See https://github.com/nuxt-community/axios-module#options
-        baseURL: process.env.API_URL || 'http://backend:8000',
+        baseURL: process.env.NODE_ENV === 'production' ? 'http://backend:8000' : 'http://0.0.0.0:3000',
         browserBaseURL: '/',
-        proxy: process.env.PROXY || false,
-        // https: true,
+        proxy: process.env.NODE_ENV !== 'production',
     },
 
+    /**
+     * Модуль прокси решает проблемы с https и cors, используется только на локалке
+     */
     proxy: {
-        '/api': process.env.API_URL || 'https://alia.idacloud.ru',
-        '/media': process.env.API_URL || 'https://alia.idacloud.ru',
+        '/api': process.env.API_URL,
+        '/media': process.env.API_URL,
     },
 
-    /*
-     ** Build configuration
+    /**
+     * Тут можно внести изменения в настройки сборки и webpack
      */
     build: {
         publicPath: '/n/',
@@ -130,6 +144,9 @@ module.exports = {
             };
 
             if (ctx.isDev && ctx.isClient) {
+                 /**
+                 * Линтим js и vue
+                 */
                 config.module.rules.push({
                     enforce: 'pre',
                     test: /\.(js|vue)$/,
@@ -137,6 +154,9 @@ module.exports = {
                     exclude: /(node_modules)/,
                 });
 
+                 /**
+                 * Линтим scss
+                 */
                 config.plugins.push(
                     new StyleLintPlugin({
                         files: ['**/*.scss', '**/*.vue'],
