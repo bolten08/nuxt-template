@@ -6,10 +6,6 @@ export const plugins = [
     '~plugins/api',
     '~plugins/lazyload',
     '~plugins/modal',
-    {
-        src: '~plugins/smoothscroll',
-        ssr: false,
-    },
     // {
     //     src: '~plugins/mapboxgl',
     //     ssr: false,

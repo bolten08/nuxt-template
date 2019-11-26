@@ -1,12 +1,8 @@
-import pkg from './package';
-// import path from 'path';
-// import fs from 'fs';
-
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 require('dotenv').config();
 
-import {plugins} from './config/plugins';
-
+import { plugins } from './config/plugins';
+import { proxy } from './config/proxy';
 
 module.exports = {
     mode: 'universal',
@@ -15,13 +11,13 @@ module.exports = {
      * frontendUrl используется при составлении абсолютного адреса для кнопок "поделиться"
      */
     env: {
-        frontendUrl: process.env.FRONTEND_URL,
+        frontendUrl: process.env.FRONTEND_URL
     },
 
     render: {
         http2: {
-            push: true,
-        },
+            push: true
+        }
     },
 
     /**
@@ -30,26 +26,55 @@ module.exports = {
      */
     head: {
         htmlAttrs: {
-            lang: 'ru',
+            lang: 'ru'
         },
-        title: pkg.name,
+        title: 'Шаблон Nuxt проекта',
         meta: [
-            {charset: 'utf-8'},
-            {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-            {hid: 'description', name: 'description', content: pkg.description},
+            { charset: 'utf-8' },
+            {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1'
+            },
+            {
+                hid: 'description',
+                name: 'description',
+                content: 'Шаблон Nuxt проекта'
+            },
             // Favicons
-            {name: 'msapplication-TileColor', content: '#ffffff'},
-            {name: 'theme-color', content: '#ffffff'},
+            { name: 'msapplication-TileColor', content: '#ffffff' },
+            { name: 'theme-color', content: '#ffffff' }
         ],
         link: [
             // Favicons
-            {rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico'},
-            {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png'},
-            {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicons/favicon-16x16.png'},
-            {rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png'},
-            {rel: 'manifest', href: '/favicons/site.webmanifest'},
-            {rel: 'mask-icon', href: '/favicons/safari-pinned-tab.svg', color: '#000000'},
-        ],
+            {
+                rel: 'icon',
+                type: 'image/x-icon',
+                href: '/favicons/favicon.ico'
+            },
+            {
+                rel: 'icon',
+                type: 'image/png',
+                sizes: '32x32',
+                href: '/favicons/favicon-32x32.png'
+            },
+            {
+                rel: 'icon',
+                type: 'image/png',
+                sizes: '16x16',
+                href: '/favicons/favicon-16x16.png'
+            },
+            {
+                rel: 'apple-touch-icon',
+                sizes: '180x180',
+                href: '/favicons/apple-touch-icon.png'
+            },
+            { rel: 'manifest', href: '/favicons/site.webmanifest' },
+            {
+                rel: 'mask-icon',
+                href: '/favicons/safari-pinned-tab.svg',
+                color: '#000000'
+            }
+        ]
     },
 
     /**
@@ -57,21 +82,25 @@ module.exports = {
      * Подробнее смотри тут https://nuxtjs.org/api/configuration-loading#using-a-custom-loading-component
      * и тут https://nuxtjs.org/examples/custom-loading
      */
-    loading: {color: '#000'},
+    loading: { color: '#000' },
 
     /**
      * Подключаем файл с вендорными стилями и файл с общими стилями
      */
-    css: [
-        '~/assets/scss/vendors.scss',
-        '~/assets/scss/common.scss',
-    ],
+    css: ['~/assets/scss/vendors.scss', '~/assets/scss/common.scss'],
 
     /**
      * Миксины и переменные доступны во всех компонентам и во всех scss файлах
      */
     styleResources: {
-        scss: '~/assets/scss/shared/*.scss',
+        scss: '~/assets/scss/shared/*.scss'
+    },
+
+    /**
+     * Sentry config
+     */
+    sentry: {
+        dsn: process.env.SENTRY_DSN || false
     },
 
     /**
@@ -87,14 +116,34 @@ module.exports = {
         '@nuxtjs/axios',
         '@nuxtjs/proxy',
         '@nuxtjs/style-resources',
+        'nuxt-polyfill'
     ],
+
+    /**
+     * Nuxt Polyfills
+     */
+    polyfill: {
+        features: [
+            {
+                require: 'intersection-observer',
+                detect: () => 'IntersectionObserver' in window
+            },
+            {
+                require: 'smoothscroll-polyfill',
+                detect: () =>
+                    'scrollBehavior' in document.documentElement.style &&
+                    window.__forceSmoothScrollPolyfill__ !== true,
+                install: smoothscroll => smoothscroll.polyfill()
+            }
+        ]
+    },
 
     /**
      * В настройках роутера меняет классы для активных ссылок
      */
     router: {
         linkActiveClass: '_active-link',
-        linkExactActiveClass: '_exact-link',
+        linkExactActiveClass: '_exact-link'
     },
 
     /**
@@ -103,18 +152,18 @@ module.exports = {
      * В продакшене при ssr запросу будут идти в docker контейнер с беком
      */
     axios: {
-        baseURL: process.env.NODE_ENV === 'production' ? 'http://backend:8000' : 'http://0.0.0.0:3000',
+        baseURL:
+            process.env.NODE_ENV === 'production'
+                ? 'http://backend:8000'
+                : 'http://0.0.0.0:3000',
         browserBaseURL: '/',
-        proxy: process.env.NODE_ENV !== 'production',
+        proxy: process.env.PROXY
     },
 
     /**
      * Модуль прокси решает проблемы с https и cors, используется только на локалке
      */
-    proxy: {
-        '/api': process.env.API_URL,
-        '/media': process.env.API_URL,
-    },
+    proxy: process.env.PROXY ? proxy() : {},
 
     /**
      * Тут можно внести изменения в настройки сборки и webpack
@@ -132,39 +181,39 @@ module.exports = {
             preset: {
                 // Change the postcss-preset-env settings
                 autoprefixer: {
-                    grid: true,
-                },
-            },
+                    grid: true
+                }
+            }
         },
 
         extend(config, ctx) {
             // Fixes npm packages that depend on `fs` module
             config.node = {
-                fs: 'empty',
+                fs: 'empty'
             };
 
             if (ctx.isDev && ctx.isClient) {
-                 /**
+                /**
                  * Линтим js и vue
                  */
                 config.module.rules.push({
                     enforce: 'pre',
                     test: /\.(js|vue)$/,
                     loader: 'eslint-loader',
-                    exclude: /(node_modules)/,
+                    exclude: /(node_modules)/
                 });
 
-                 /**
+                /**
                  * Линтим scss
                  */
                 config.plugins.push(
                     new StyleLintPlugin({
                         files: ['**/*.scss', '**/*.vue'],
                         failOnError: false,
-                        quiet: false,
-                    }),
+                        quiet: false
+                    })
                 );
             }
-        },
-    },
+        }
+    }
 };
