@@ -55,7 +55,7 @@ textarea {
 
 input {
     outline: none;
-    
+
     &[type=number]::-webkit-inner-spin-button,
     &[type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -80,4 +80,8 @@ h6 {
     margin: 0;
     font-weight: normal;
     font-size: initial;
+}
+
+address {
+    font-style: normal;
 }
