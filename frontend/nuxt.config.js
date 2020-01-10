@@ -163,7 +163,7 @@ module.exports = {
     /**
      * Модуль прокси решает проблемы с https и cors, используется только на локалке
      */
-    proxy: process.env.PROXY ? proxy() : {},
+    proxy: process.env.PROXY_URL ? proxy() : {},
 
     /**
      * Тут можно внести изменения в настройки сборки и webpack
