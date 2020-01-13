@@ -5,7 +5,7 @@ export const plugins = [
     '~plugins/axios',
     '~plugins/api',
     '~plugins/lazyload',
-    '~plugins/modal',
+    // '~plugins/modal',
     // {
     //     src: '~plugins/mapboxgl',
     //     ssr: false,

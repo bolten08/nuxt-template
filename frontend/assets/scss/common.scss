@@ -2,3 +2,20 @@
 @import './common/reset';
 @import './common/text';
 @import './common/transitions';
+
+.lazy-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity .3s ease .1s;
+
+    &[lazy="loaded"] {
+        opacity: 1;
+    }
+}
