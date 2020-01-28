@@ -15,7 +15,7 @@ const components = [
 ];
 
 /**
- * Install Engine
+ * Install UI components
  **/
 components.forEach(component => {
     Vue.component(component.name, component);

@@ -7,13 +7,6 @@ import { proxy } from './config/proxy';
 module.exports = {
     mode: 'universal',
 
-    /**
-     * frontendUrl используется при составлении абсолютного адреса для кнопок "поделиться"
-     */
-    env: {
-        frontendUrl: process.env.FRONTEND_URL
-    },
-
     render: {
         http2: {
             push: true
@@ -46,34 +39,12 @@ module.exports = {
         ],
         link: [
             // Favicons
-            {
-                rel: 'icon',
-                type: 'image/x-icon',
-                href: '/favicons/favicon.ico'
-            },
-            {
-                rel: 'icon',
-                type: 'image/png',
-                sizes: '32x32',
-                href: '/favicons/favicon-32x32.png'
-            },
-            {
-                rel: 'icon',
-                type: 'image/png',
-                sizes: '16x16',
-                href: '/favicons/favicon-16x16.png'
-            },
-            {
-                rel: 'apple-touch-icon',
-                sizes: '180x180',
-                href: '/favicons/apple-touch-icon.png'
-            },
+            { rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico' },
+            { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png' },
+            { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicons/favicon-16x16.png' },
+            { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png' },
             { rel: 'manifest', href: '/favicons/site.webmanifest' },
-            {
-                rel: 'mask-icon',
-                href: '/favicons/safari-pinned-tab.svg',
-                color: '#000000'
-            }
+            { rel: 'mask-icon', href: '/favicons/safari-pinned-tab.svg', color: '#000000' }
         ]
     },
 
@@ -87,7 +58,10 @@ module.exports = {
     /**
      * Подключаем файл с вендорными стилями и файл с общими стилями
      */
-    css: ['~/assets/scss/vendors.scss', '~/assets/scss/common.scss'],
+    css: [
+        '~/assets/scss/vendors.scss', 
+        '~/assets/scss/common.scss'
+    ],
 
     /**
      * Миксины и переменные доступны во всех компонентам и во всех scss файлах
@@ -144,20 +118,6 @@ module.exports = {
     router: {
         linkActiveClass: '_active-link',
         linkExactActiveClass: '_exact-link'
-    },
-
-    /**
-     * Модуль аксиоса используется для работы с апи на удаленном бекенде. Для этого дополнительно
-     * настраиваем проксирование запросов. (https://github.com/nuxt-community/axios-module#options)
-     * В продакшене при ssr запросу будут идти в docker контейнер с беком
-     */
-    axios: {
-        baseURL:
-            process.env.NODE_ENV === 'production'
-                ? 'http://backend:8000'
-                : 'http://0.0.0.0:3000',
-        browserBaseURL: '/',
-        proxy: process.env.PROXY
     },
 
     /**

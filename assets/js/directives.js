@@ -1,5 +1,5 @@
 import Vue from 'vue';
 
-import Clickoutside from './clickoutside';
+import Clickoutside from './directives/clickoutside';
 
 Vue.directive('clickoutside', Clickoutside);
