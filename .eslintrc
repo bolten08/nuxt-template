@@ -37,6 +37,15 @@
         "vue/no-v-html": "off",
         "vue/multiline-html-element-content-newline": "off",
         "vue/singleline-html-element-content-newline": "off",
-        "vue/html-closing-bracket-spacing": "off"
+        "vue/html-closing-bracket-spacing": "off",
+        "vue/attribute-hyphenation": [
+            "error",
+            "always",
+            {
+                "ignore": [
+                    "viewBox"
+                ]
+            }
+        ]
     }
 }
