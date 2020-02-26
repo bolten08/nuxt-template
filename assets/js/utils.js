@@ -162,7 +162,7 @@ export function queryToObject(qs) {
             let name = param.split('=')[0];
             let value = param.split('=')[1];
             if (name && value) {
-                if (obj.hasOwnProperty(name)) {
+                if (Object.prototype.hasOwnProperty.call(obj, name)) {
                     if (Array.isArray(obj[name])) {
                         obj[name].push(value);
                     } else {
@@ -193,23 +193,6 @@ export function objectToQuery(obj) {
         }
     }
     return qs.slice(0, -1);
-}
-
-export function scrollbarWidth() {
-    if (typeof document === 'undefined') return 0;
-
-    const div = document.createElement('div');
-
-    div.style.position = 'fixed';
-    div.style.left = 0;
-    div.style.visibility = 'hidden';
-    div.style.overflowY = 'scroll';
-
-    document.body.appendChild(div);
-    const width = div.getBoundingClientRect().right;
-    document.body.removeChild(div);
-
-    return width;
 }
 
 export function getOffset(el) {

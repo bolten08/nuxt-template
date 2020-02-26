@@ -12,16 +12,15 @@
         "update": "ncu -u"
     },
     "dependencies": {
-        "@nuxtjs/axios": "^5.9.3",
+        "@nuxtjs/axios": "^5.9.5",
         "@nuxtjs/dotenv": "^1.4.1",
         "@nuxtjs/proxy": "^1.3.3",
         "cross-env": "^7.0.0",
-        "gsap": "^3.1.1",
+        "gsap": "^3.2.0",
         "intersection-observer": "^0.7.0",
-        "lodash": "^4.17.15",
         "node-sass": "^4.13.1",
         "normalize.css": "^8.0.1",
-        "npm-check-updates": "^4.0.1",
+        "npm-check-updates": "^4.0.2",
         "nuxt": "^2.11.0",
         "nuxt-polyfill": "^1.0.3",
         "resize-observer-polyfill": "^1.5.1",
@@ -30,16 +29,16 @@
     },
     "devDependencies": {
         "@nuxtjs/style-resources": "^1.0.0",
-        "babel-eslint": "^10.0.3",
+        "babel-eslint": "^10.1.0",
         "eslint": "^6.8.0",
         "eslint-loader": "^3.0.3",
-        "eslint-plugin-vue": "^6.1.2",
+        "eslint-plugin-vue": "^6.2.1",
         "nodemon": "^2.0.2",
         "sass-loader": "^8.0.2",
-        "stylelint": "^13.0.0",
+        "stylelint": "^13.2.0",
         "stylelint-config-css-modules": "^2.2.0",
-        "stylelint-config-standard": "^19.0.0",
+        "stylelint-config-standard": "^20.0.0",
         "stylelint-scss": "^3.14.2",
-        "stylelint-webpack-plugin": "^1.2.1"
+        "stylelint-webpack-plugin": "^1.2.3"
     }
 }
