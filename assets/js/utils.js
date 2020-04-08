@@ -61,6 +61,10 @@ export function bytesToSize(bytes) {
 }
 
 export function monthByNumber(num, type = 'full') {
+    if (typeof num !== 'number' || isNaN(num) || num < 0 || num > 11) {
+        console.warn('[monthByNumber] Wrong number ', num);
+        return '';
+    }
     const months = {
         0: {
             full: 'Январь',
@@ -127,6 +131,65 @@ export function monthByNumber(num, type = 'full') {
     return months[num][type];
 }
 
+
+export function dayByNumber(num, type = 'full') {
+    if (num > 6) {
+        console.warn('[dayByNumber] Wrong number,', num);
+        return '';
+    }
+
+    const days = {
+        0: {
+            full: 'Воскресенье',
+            short: 'вс',
+        },
+        1: {
+            full: 'Понедельник',
+            short: 'пн',
+        },
+        2: {
+            full: 'Вторник',
+            short: 'вт',
+        },
+        3: {
+            full: 'Среда',
+            short: 'ср',
+        },
+        4: {
+            full: 'Четверг',
+            short: 'чт',
+        },
+        5: {
+            full: 'Пятница',
+            short: 'пт',
+        },
+        6: {
+            full: 'Суббота',
+            short: 'сб',
+        },
+    };
+
+    return days[num][type];
+}
+
+export function dateToString(date) {
+    if (!date || !(date instanceof Date)) {
+        console.log('[dateToString] Wrong date, ', date);
+        return '';
+    }
+
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    if (month.toString().length < 2) {
+        month = '0' + month;
+    }
+    if (day.toString().length < 2) {
+        day = '0' + day;
+    }
+    return `${year}-${month}-${day}`;
+}
 
 export function getCookie(name) {
     let decodedCookie = decodeURIComponent(document.cookie);
