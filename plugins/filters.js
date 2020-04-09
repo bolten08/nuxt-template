@@ -10,6 +10,8 @@
     // prettyPhone,
     // bytesToSize,
     // monthByNumber,
+    // dayByNumber,
+    // dateToString,
 // } from '../assets/js/utils';
 
 // Vue.filter('splitThousands', splitThousands);
@@ -18,3 +20,5 @@
 // Vue.filter('prettyPhone', prettyPhone);
 // Vue.filter('bytesToSize', bytesToSize);
 // Vue.filter('monthByNumber', monthByNumber);
+// Vue.filter('dayByNumber', dayByNumber);
+// Vue.filter('dateToString', dateToString);

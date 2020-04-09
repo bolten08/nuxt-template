@@ -1,3 +1,4 @@
+/* Has filter */
 export function splitThousands(num, separator = ' ') {
     if (num === undefined || num === null) {
         console.warn('[splitThousands] Wrong Number ', num);
@@ -11,6 +12,7 @@ export function splitThousands(num, separator = ' ') {
     return value;
 }
 
+/* Has filter */
 export function roundToMillions(num, accuracy = 1) {
     if (num === undefined || num === null) {
         console.warn('[roundToMillions] Wrong Number ', num);
@@ -20,6 +22,7 @@ export function roundToMillions(num, accuracy = 1) {
     return (Number(num) / 1000000).toFixed(accuracy);
 }
 
+/* Has filter */
 export function plural(num, postfixes) {
     if (!num) {
         console.warn('[plural] Wrong Number ', num);
@@ -41,6 +44,7 @@ export function plural(num, postfixes) {
     return postfixes[2];
 }
 
+/* Has filter */
 export function prettyPhone(rawPhoneNumber) {
     return rawPhoneNumber.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3-$4-$5');
 }
@@ -49,6 +53,7 @@ export function cleanPhone(prettyPhoneNumber) {
     return prettyPhoneNumber.replace(/ |-|\(|\)|_/g, '');
 }
 
+/* Has filter */
 export function bytesToSize(bytes) {
     if (!bytes) {
         console.warn('[bytesToSize] Wrong bytes ', bytes);
@@ -60,6 +65,7 @@ export function bytesToSize(bytes) {
     return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
 }
 
+/* Has filter */
 export function monthByNumber(num, type = 'full') {
     if (typeof num !== 'number' || isNaN(num) || num < 0 || num > 11) {
         console.warn('[monthByNumber] Wrong number ', num);
@@ -131,7 +137,7 @@ export function monthByNumber(num, type = 'full') {
     return months[num][type];
 }
 
-
+/* Has filter */
 export function dayByNumber(num, type = 'full') {
     if (num > 6) {
         console.warn('[dayByNumber] Wrong number,', num);
@@ -172,6 +178,7 @@ export function dayByNumber(num, type = 'full') {
     return days[num][type];
 }
 
+/* Has filter */
 export function dateToString(date) {
     if (!date || !(date instanceof Date)) {
         console.log('[dateToString] Wrong date, ', date);
@@ -258,6 +265,18 @@ export function objectToQuery(obj) {
     return qs.slice(0, -1);
 }
 
+export function formDataToObject(formData) {
+    if (!formData || typeof formData !== 'object') {
+        console.warn('[formDataToObject] wrong FormData');
+        return {};
+    }
+    let obj = {};
+    formData.forEach((value, key) => {
+        obj[key] = value;
+    });
+    return obj;
+}
+
 export function getOffset(el) {
     let rect = el.getBoundingClientRect();
 
@@ -267,6 +286,7 @@ export function getOffset(el) {
     };
 }
 
+//Not stable
 export function truncText(el, t) {
     let text = t || el.textContent;
     let wordArray = text.split(' ');
