@@ -1,3 +1,6 @@
+// import path from 'path';
+// import fs from 'fs';
+
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 require('dotenv').config();
 
@@ -12,6 +15,17 @@ module.exports = {
             push: true
         }
     },
+
+    /**
+     * Раскоментить блок ниже, если необходимо локалку запустить по https.
+     * В env добавить 2 переменные HTTPS_KEY и HTTPS_CERT, которые являются путями до сертификатов
+     */
+    // server: process.env.HTTPS_KEY && process.env.HTTPS_CERT ? {
+    //     https: {
+    //         key: fs.readFileSync(path.resolve(__dirname, process.env.HTTPS_KEY)),
+    //         cert: fs.readFileSync(path.resolve(__dirname, process.env.HTTPS_CERT)),
+    //     },
+    // } : {},
 
     /**
      * Метатеги, фавиконки и т.п
@@ -33,12 +47,12 @@ module.exports = {
                 name: 'description',
                 content: 'Шаблон Nuxt проекта'
             },
-            // Favicons
+            /* Favicons */
             { name: 'msapplication-TileColor', content: '#ffffff' },
             { name: 'theme-color', content: '#ffffff' }
         ],
         link: [
-            // Favicons
+            /* Favicons */
             { rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico' },
             { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png' },
             { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicons/favicon-16x16.png' },
@@ -121,7 +135,7 @@ module.exports = {
     },
 
     /**
-     * Модуль прокси решает проблемы с https и cors, используется только на локалке
+     * Модуль прокси решает проблемы с CORS, используется только на локалке
      */
     proxy: process.env.PROXY_URL ? proxy() : {},
 
