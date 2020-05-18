@@ -47,6 +47,7 @@
             4, {
                 baseIndentLevel: 1
             }
-        ]
+        ],
+        number-leading-zero: "never",
     }
 }

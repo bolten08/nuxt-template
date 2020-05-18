@@ -127,9 +127,7 @@
         z-index: 2;
 
         &:hover + svg {
-
             .letters {
-
                 & > g {
                     transform: translateY(-8px);
                     opacity: 0;
@@ -143,7 +141,6 @@
                 }
 
                 &._after {
-
                     & > g {
                         transform: translateY(0);
                         opacity: 1;
@@ -158,13 +155,11 @@
     }
 
     .letters {
-
         & > g {
             transition: transform .4s ease, opacity .4s ease;
         }
 
         &._after {
-
             & > g {
                 transform: translateY(8px);
                 opacity: 0;

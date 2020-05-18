@@ -1,5 +1,4 @@
 @mixin aspect-ratio($width, $height) {
-
     &:before {
         content: '';
         display: block;
@@ -23,9 +22,7 @@
         @media (max-width: $max) {
             @content;
         }
-    }
-
-    @else {
+    } @else {
         @content;
     }
 }
@@ -59,5 +56,5 @@
 }
 
 @function breakpoint-infix($name, $bp: $breakpoints) {
-    @return if(breakpoint-min($name, $bp) == null, "", "-#{$name}");
+    @return if(breakpoint-min($name, $bp) == null, '', '-#{$name}');
 }
