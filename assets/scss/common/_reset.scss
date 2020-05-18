@@ -53,6 +53,14 @@ textarea {
     appearance: none;
 }
 
+button {
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: inherit;
+    outline: none;
+}
+
 input {
     outline: none;
 
@@ -83,7 +91,7 @@ h5,
 h6 {
     margin: 0;
     font-weight: normal;
-    font-size: initial;
+    font-size: inherit;
 }
 
 address {
