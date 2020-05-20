@@ -1,30 +1,27 @@
 <template>
     <div>
-        <TheHeader/>
+        <TheHeader />
 
         <main :class="$style.main">
-            <nuxt/>
+            <nuxt />
         </main>
 
-        <TheFooter/>
-        <TheSprite/>
-        <!--        <TheModal />-->
+        <TheFooter />
+        <TheModal />
     </div>
 </template>
 
 <script>
     import TheHeader from '~/components/layout/TheHeader';
     import TheFooter from '~/components/layout/TheFooter';
-    import TheSprite from '~/components/layout/TheSprite';
-    // import TheModal from '~/components/common/TheModal';
+    import TheModal from '~/components/layout/TheModal';
 
     export default {
         components: {
             TheHeader,
             TheFooter,
-            TheSprite,
-            // TheModal
-        },
+            TheModal
+        }
     };
 </script>
 

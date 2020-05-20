@@ -1,7 +1,7 @@
 /* Has filter */
 export function splitThousands(num, separator = ' ') {
-    if (num === undefined || num === null) {
-        console.warn('[splitThousands] Wrong Number ', num);
+    if (typeof num !== 'number' && !Number.isNaN(num)) {
+        console.warn('[Utils/roundToMillions] Аргумент "num" должен быть Number: ', num);
         return '';
     }
     let tmp = num.toString().split('.');
@@ -14,8 +14,12 @@ export function splitThousands(num, separator = ' ') {
 
 /* Has filter */
 export function roundToMillions(num, accuracy = 1) {
-    if (num === undefined || num === null) {
-        console.warn('[roundToMillions] Wrong Number ', num);
+    if (typeof num !== 'number' && !Number.isNaN(num)) {
+        console.warn('[Utils/roundToMillions] Аргумент "num" должен быть Number: ', num);
+        return '';
+    }
+    if (typeof accuracy !== 'number' && !Number.isNaN(accuracy)) {
+        console.warn('[Utils/roundToMillions] Аргумент "accuracy" должен быть Number: ', num);
         return '';
     }
 
@@ -26,7 +30,7 @@ export function roundToMillions(num, accuracy = 1) {
 export function plural(num, postfixes) {
     if (!num) {
         console.warn('[plural] Wrong Number ', num);
-        return '';   
+        return '';
     }
 
     let n = Math.abs(num);
@@ -55,7 +59,7 @@ export function cleanPhone(prettyPhoneNumber) {
 
 /* Has filter */
 export function bytesToSize(bytes) {
-    if (!bytes) {
+    if (bytes === undefined || bytes === null) {
         console.warn('[bytesToSize] Wrong bytes ', bytes);
         return '';
     }
@@ -133,7 +137,7 @@ export function monthByNumber(num, type = 'full') {
             case: 'Декабря'
         }
     };
-    
+
     return months[num][type];
 }
 
