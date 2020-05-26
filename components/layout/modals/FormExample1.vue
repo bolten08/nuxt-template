@@ -48,11 +48,11 @@
         pointer-events: none;
 
         &:global(.form-appear-enter-active) {
-            transition: transform 0.8s;
+            transition: transform .8s;
         }
 
         &:global(.form-appear-leave-active) {
-            transition: transform 0.4s;
+            transition: transform .4s;
         }
 
         &:global(.form-appear-enter),

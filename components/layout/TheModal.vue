@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import { lockBody, unlockBody } from '../../assets/js/utils';
+    import { lockBody, unlockBody } from '../../assets/js/utils/commonUtils';
 
     export default {
         data() {
@@ -98,16 +98,16 @@
         z-index: 98;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, .7);
         overflow: hidden;
         -webkit-overflow-scrolling: touch;
 
         &:global(.overlay-appear-enter-active) {
-            transition: all 0.4s;
+            transition: all .4s;
         }
 
         &:global(.overlay-appear-leave-active) {
-            transition: all 0.2s;
+            transition: all .2s;
             opacity: 0;
         }
 
