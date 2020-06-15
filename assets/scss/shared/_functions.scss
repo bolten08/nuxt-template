@@ -1,0 +1,28 @@
+/* For respond-to */
+@function breakpoint-max($name, $bp: $breakpoints) {
+    $next: breakpoint-next($name, $bp);
+
+    @return if($next, breakpoint-min($next, $bp) - .02, null);
+}
+
+@function breakpoint-min($name, $bp: $breakpoints) {
+    $min: map-get($bp, $name);
+
+    @return if($min != 0, $min, null);
+}
+
+@function breakpoint-next($name, $bp: $breakpoints, $breakpoint-names: map-keys($bp)) {
+    $n: index($breakpoint-names, $name);
+
+    @return if($n != null and $n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+@function breakpoint-infix($name, $bp: $breakpoints) {
+    @return if(breakpoint-min($name, $bp) == null, '', '-#{$name}');
+}
+
+/* End respond-to */
+
+@function rgb-from-hex($hex) {
+    @return red($hex), green($hex), blue($hex);
+}

@@ -6,7 +6,7 @@ import Vue from 'vue';
 import './ui.scss';
 
 /**
- * Import Components
+ * Импорт компонентов
  **/
 // import Button from '~/engine/button/Button';
 
@@ -14,9 +14,15 @@ const components = [
     // Button,
 ];
 
+
 /**
- * Install UI components
+ * Регистрация компонентов.
+ * Теперь можно их использовать в любом vue-шаблоне
  **/
 components.forEach(component => {
-    Vue.component(component.name, component);
+    if (component.name) {
+        Vue.component(component.name, component);
+    } else {
+        console.warn('[UI] Register / No component name: ', component);
+    }
 });

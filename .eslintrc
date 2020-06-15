@@ -12,6 +12,7 @@
         "parser": "babel-eslint"
     },
     "plugins": [
+        "prettier",
         "vue"
     ],
     "rules": {

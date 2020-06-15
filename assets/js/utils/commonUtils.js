@@ -79,63 +79,63 @@ export function monthByNumber(num, type = 'full') {
         0: {
             full: 'Январь',
             short: 'Янв',
-            case: 'Января'
+            case: 'Января',
         },
         1: {
             full: 'Февраль',
             short: 'Фев',
-            case: 'Февраля'
+            case: 'Февраля',
         },
         2: {
             full: 'Март',
             short: 'Мар',
-            case: 'Марта'
+            case: 'Марта',
         },
         3: {
             full: 'Апрель',
             short: 'Апр',
-            case: 'Апреля'
+            case: 'Апреля',
         },
         4: {
             full: 'Май',
             short: 'Май',
-            case: 'Мая'
+            case: 'Мая',
         },
         5: {
             full: 'Июнь',
             short: 'Июн',
-            case: 'Июня'
+            case: 'Июня',
         },
         6: {
             full: 'Июль',
             short: 'Июл',
-            case: 'Июля'
+            case: 'Июля',
         },
         7: {
             full: 'Август',
             short: 'Авг',
-            case: 'Августа'
+            case: 'Августа',
         },
         8: {
             full: 'Сентябрь',
             short: 'Сен',
-            case: 'Сентября'
+            case: 'Сентября',
         },
         9: {
             full: 'Октябрь',
             short: 'Окт',
-            case: 'Октября'
+            case: 'Октября',
         },
         10: {
             full: 'Ноябрь',
             short: 'Ноя',
-            case: 'Ноября'
+            case: 'Ноября',
         },
         11: {
             full: 'Декабрь',
             short: 'Дек',
-            case: 'Декабря'
-        }
+            case: 'Декабря',
+        },
     };
 
     return months[num][type];
@@ -226,49 +226,6 @@ export function chunkArray(arr, chunkSize) {
     return results;
 }
 
-export function queryToObject(qs) {
-    let obj = {};
-
-    if (qs) {
-        let params = qs.split('&');
-
-        params.forEach(param => {
-            let name = param.split('=')[0];
-            let value = param.split('=')[1];
-            if (name && value) {
-                if (Object.prototype.hasOwnProperty.call(obj, name)) {
-                    if (Array.isArray(obj[name])) {
-                        obj[name].push(value);
-                    } else {
-                        obj[name] = [obj[name], value];
-                    }
-                } else {
-                    obj[name] = value;
-                }
-            }
-        });
-    }
-    return obj;
-}
-
-export function objectToQuery(obj) {
-    let qs = '';
-    for (let name in obj) {
-        if (obj[name]) {
-            if (Array.isArray(obj[name])) {
-                obj[name].forEach(val => {
-                    if (val) {
-                        qs += `${name}=${val}&`;
-                    }
-                });
-            } else {
-                qs += `${name}=${obj[name]}&`;
-            }
-        }
-    }
-    return qs.slice(0, -1);
-}
-
 export function formDataToObject(formData) {
     if (!formData || typeof formData !== 'object') {
         console.warn('[formDataToObject] wrong FormData');
@@ -286,7 +243,7 @@ export function getOffset(el) {
 
     return {
         top: rect.top + window.pageYOffset,
-        left: rect.left + window.pageXOffset
+        left: rect.left + window.pageXOffset,
     };
 }
 

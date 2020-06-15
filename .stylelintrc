@@ -16,9 +16,9 @@
                     "first-nested",
                 ],
                 "ignore": [
-                    "after-comment", 
+                    "after-comment",
                 ],
-                "ignoreAtRules": ["if", "else"] 
+                "ignoreAtRules": ["if", "else"]
             }
         ],
         "rule-empty-line-before": [
@@ -34,8 +34,8 @@
         "comment-empty-line-before": "always",
         "block-closing-brace-newline-before": "always",
         "block-closing-brace-newline-after": [
-            "always", { 
-                "ignoreAtRules": ["if", "else"] 
+            "always", {
+                "ignoreAtRules": ["if", "else"]
             }
         ],
         "declaration-no-important": true,
@@ -48,6 +48,6 @@
                 baseIndentLevel: 1
             }
         ],
-        number-leading-zero: "never",
+        number-leading-zero: "never"
     }
 }
