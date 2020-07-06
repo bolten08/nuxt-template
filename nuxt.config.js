@@ -1,12 +1,7 @@
 // import path from 'path';
 // import fs from 'fs';
-
-const StyleLintPlugin = require('stylelint-webpack-plugin');
-
 import {plugins} from './config/plugins';
 import {proxy} from './config/proxy';
-
-console.log(process.env.API_URL);
 
 module.exports = {
     mode: 'universal',
@@ -103,7 +98,32 @@ module.exports = {
     /**
      * Модули
      */
-    modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/style-resources', 'nuxt-polyfill'],
+    modules: [
+        '@nuxtjs/axios',
+        '@nuxtjs/proxy',
+        '@nuxtjs/style-resources',
+        'nuxt-polyfill',
+    ],
+
+    buildModules: [
+        [
+            '@nuxtjs/stylelint-module',
+            {
+                files: ['**/*.scss', '**/*.vue'],
+                failOnError: false,
+                quiet: false,
+            },
+        ],
+        [
+            '@nuxtjs/eslint-module',
+            {
+                enforce: 'pre',
+                test: /\.(js|vue)$/,
+                loader: 'eslint-loader',
+                exclude: /(node_modules)/,
+            },
+        ],
+    ],
 
     /**
      * Nuxt Polyfills
@@ -158,34 +178,11 @@ module.exports = {
             },
         },
 
-        extend(config, ctx) {
-            // Fixes npm packages that depend on `fs` module
-            config.node = {
-                fs: 'empty',
-            };
-
-            if (ctx.isDev && ctx.isClient) {
-                /**
-                 * Линтим js и vue
-                 */
-                config.module.rules.push({
-                    enforce: 'pre',
-                    test: /\.(js|vue)$/,
-                    loader: 'eslint-loader',
-                    exclude: /(node_modules)/,
-                });
-
-                /**
-                 * Линтим scss
-                 */
-                config.plugins.push(
-                    new StyleLintPlugin({
-                        files: ['**/*.scss', '**/*.vue'],
-                        failOnError: false,
-                        quiet: false,
-                    })
-                );
-            }
-        },
+        // extend(config, ctx) {
+        //     // Fixes npm packages that depend on `fs` module
+        //     config.node = {
+        //         fs: 'empty',
+        //     };
+        // },
     },
 };
