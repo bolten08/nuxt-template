@@ -2,18 +2,25 @@
 // import fs from 'fs';
 
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-require('dotenv').config();
 
-import { plugins } from './config/plugins';
-import { proxy } from './config/proxy';
+import {plugins} from './config/plugins';
+import {proxy} from './config/proxy';
+
+console.log(process.env.API_URL);
 
 module.exports = {
     mode: 'universal',
+    target: 'server',
+
+    publicRuntimeConfig: {
+        proxyUrl: process.env.PROXY_URL,
+        backendUrl: process.env.BACKEND_URL,
+    },
 
     render: {
         http2: {
-            push: true
-        }
+            push: true,
+        },
     },
 
     /**
@@ -33,33 +40,33 @@ module.exports = {
      */
     head: {
         htmlAttrs: {
-            lang: 'ru'
+            lang: 'ru',
         },
         title: 'Шаблон Nuxt проекта',
         meta: [
-            { charset: 'utf-8' },
+            {charset: 'utf-8'},
             {
                 name: 'viewport',
-                content: 'width=device-width, initial-scale=1'
+                content: 'width=device-width, initial-scale=1',
             },
             {
                 hid: 'description',
                 name: 'description',
-                content: 'Шаблон Nuxt проекта'
+                content: 'Шаблон Nuxt проекта',
             },
             /* Favicons */
-            { name: 'msapplication-TileColor', content: '#ffffff' },
-            { name: 'theme-color', content: '#ffffff' }
+            {name: 'msapplication-TileColor', content: '#ffffff'},
+            {name: 'theme-color', content: '#ffffff'},
         ],
         link: [
             /* Favicons */
-            { rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico' },
-            { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png' },
-            { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicons/favicon-16x16.png' },
-            { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png' },
-            { rel: 'manifest', href: '/favicons/site.webmanifest' },
-            { rel: 'mask-icon', href: '/favicons/safari-pinned-tab.svg', color: '#000000' }
-        ]
+            {rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico'},
+            {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicons/favicon-32x32.png'},
+            {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicons/favicon-16x16.png'},
+            {rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png'},
+            {rel: 'manifest', href: '/favicons/site.webmanifest'},
+            {rel: 'mask-icon', href: '/favicons/safari-pinned-tab.svg', color: '#000000'},
+        ],
     },
 
     /**
@@ -67,28 +74,25 @@ module.exports = {
      * Подробнее смотри тут https://nuxtjs.org/api/configuration-loading#using-a-custom-loading-component
      * и тут https://nuxtjs.org/examples/custom-loading
      */
-    loading: { color: '#000' },
+    loading: {color: '#000'},
 
     /**
      * Подключаем файл с вендорными стилями и файл с общими стилями
      */
-    css: [
-        '~/assets/scss/vendors.scss', 
-        '~/assets/scss/common.scss'
-    ],
+    css: ['~/assets/scss/vendors.scss', '~/assets/scss/common.scss'],
 
     /**
      * Миксины и переменные доступны во всех компонентам и во всех scss файлах
      */
     styleResources: {
-        scss: '~/assets/scss/shared/*.scss'
+        scss: '~/assets/scss/shared/*.scss',
     },
 
     /**
      * Sentry config
      */
     sentry: {
-        dsn: process.env.SENTRY_DSN || false
+        dsn: process.env.SENTRY_DSN || false,
     },
 
     /**
@@ -99,13 +103,7 @@ module.exports = {
     /**
      * Модули
      */
-    modules: [
-        '@nuxtjs/dotenv',
-        '@nuxtjs/axios',
-        '@nuxtjs/proxy',
-        '@nuxtjs/style-resources',
-        'nuxt-polyfill'
-    ],
+    modules: ['@nuxtjs/axios', '@nuxtjs/proxy', '@nuxtjs/style-resources', 'nuxt-polyfill'],
 
     /**
      * Nuxt Polyfills
@@ -114,16 +112,16 @@ module.exports = {
         features: [
             {
                 require: 'intersection-observer',
-                detect: () => 'IntersectionObserver' in window
+                detect: () => 'IntersectionObserver' in window,
             },
             {
                 require: 'smoothscroll-polyfill',
                 detect: () =>
                     'scrollBehavior' in document.documentElement.style &&
                     window.__forceSmoothScrollPolyfill__ !== true,
-                install: smoothscroll => smoothscroll.polyfill()
-            }
-        ]
+                install: smoothscroll => smoothscroll.polyfill(),
+            },
+        ],
     },
 
     /**
@@ -131,7 +129,7 @@ module.exports = {
      */
     router: {
         linkActiveClass: '_active-link',
-        linkExactActiveClass: '_exact-link'
+        linkExactActiveClass: '_exact-link',
     },
 
     /**
@@ -155,15 +153,15 @@ module.exports = {
             preset: {
                 // Change the postcss-preset-env settings
                 autoprefixer: {
-                    grid: true
-                }
-            }
+                    grid: true,
+                },
+            },
         },
 
         extend(config, ctx) {
             // Fixes npm packages that depend on `fs` module
             config.node = {
-                fs: 'empty'
+                fs: 'empty',
             };
 
             if (ctx.isDev && ctx.isClient) {
@@ -174,7 +172,7 @@ module.exports = {
                     enforce: 'pre',
                     test: /\.(js|vue)$/,
                     loader: 'eslint-loader',
-                    exclude: /(node_modules)/
+                    exclude: /(node_modules)/,
                 });
 
                 /**
@@ -184,10 +182,10 @@ module.exports = {
                     new StyleLintPlugin({
                         files: ['**/*.scss', '**/*.vue'],
                         failOnError: false,
-                        quiet: false
+                        quiet: false,
                     })
                 );
             }
-        }
-    }
+        },
+    },
 };

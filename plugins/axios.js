@@ -1,4 +1,4 @@
-export default ({$axios, req}) => {
+export default ({$config, $axios, req}) => {
     $axios.defaults.xsrfCookieName = 'csrftoken';
     $axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
@@ -8,10 +8,10 @@ export default ({$axios, req}) => {
     $axios.setHeader('X-Forwarded-Proto', headers['x-forwarded-proto']);
 
     let endpoint;
-    if (process.env.PROXY_URL) {
-        endpoint = process.env.PROXY_URL;
-    } else if (process.env.BACKEND_HOST) {
-        endpoint = `http://${process.env.BACKEND_HOST}:8000/`;
+    if ($config.proxyUrl) {
+        endpoint = $config.proxyUrl;
+    } else if ($config.backendUrl) {
+        endpoint = $config.backendUrl;
     } else {
         endpoint = 'http://backend:8000/';
     }
@@ -20,5 +20,4 @@ export default ({$axios, req}) => {
         endpoint = `${location.origin}/`;
     }
     $axios.setBaseURL(endpoint);
-
 };
