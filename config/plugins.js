@@ -1,9 +1,9 @@
 export const plugins = [
     '~assets/js/directives/index.js',
     '~components/ui/ui.js',
-    '~plugins/filters',
-    '~plugins/axios',
+    '~config/plugins/filters',
+    '~config/plugins/axios',
     // '~plugins/api',
-    '~plugins/lazyload',
-    '~plugins/modal',
+    '~config/plugins/lazyload',
+    '~config/plugins/modal',
 ];

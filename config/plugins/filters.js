@@ -12,7 +12,7 @@
     // monthByNumber,
     // dayByNumber,
     // dateToString,
-// } from '../assets/js/utils/commonUtils';
+// } from 'assets/js/utils/commonUtils';
 
 // Vue.filter('splitThousands', splitThousands);
 // Vue.filter('roundToMillions', roundToMillions);
