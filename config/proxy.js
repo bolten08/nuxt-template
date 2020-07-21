@@ -5,6 +5,7 @@ export const proxy = () => ({
             '^/graphql': '/graphql/',
         },
     },
+    '/api': process.env.PROXY_URL,
     '/video': process.env.PROXY_URL,
     '/media': process.env.PROXY_URL,
 });

@@ -183,6 +183,11 @@ module.exports = {
         //     config.node = {
         //         fs: 'empty',
         //     };
+        // config.module.rules.push({
+        //     test: /\.(graphql|gql)$/,
+        //     exclude: /node_modules/,
+        //     loader: 'graphql-tag/loader',
+        // });
         // },
     },
 };
