@@ -4,14 +4,14 @@
 
 // import Vue from 'vue';
 // import {
-    // splitThousands,
-    // roundToMillions,
-    // plural,
-    // prettyPhone,
-    // bytesToSize,
-    // monthByNumber,
-    // dayByNumber,
-    // dateToString,
+// splitThousands,
+// roundToMillions,
+// plural,
+// prettyPhone,
+// bytesToSize,
+// monthByNumber,
+// dayByNumber,
+// dateToString,
 // } from 'assets/js/utils/commonUtils';
 
 // Vue.filter('splitThousands', splitThousands);

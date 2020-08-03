@@ -36,3 +36,9 @@
         font-display: swap;
     }
 }
+
+@mixin hover {
+    @media (hover), (min-width: 0\0) {
+        @content;
+    }
+}

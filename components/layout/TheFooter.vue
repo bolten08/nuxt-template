@@ -2,7 +2,7 @@
     <footer :class="$style.TheFooter">
         The Footer
 
-        <LogoIda :class="$style.ida"/>
+        <LogoIda :class="$style.ida" />
     </footer>
 </template>
 

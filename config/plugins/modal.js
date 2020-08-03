@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 const ModalPlugin = {
-    install(Vue, options = {}) {
+    install(Vue) {
         Vue.prototype.$modal = {
             event: new Vue(),
 
@@ -11,9 +11,9 @@ const ModalPlugin = {
 
             close() {
                 this.event.$emit('close');
-            }
+            },
         };
-    }
+    },
 };
 
 Vue.use(ModalPlugin);

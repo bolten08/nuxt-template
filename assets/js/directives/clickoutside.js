@@ -7,14 +7,17 @@ const nodeList = [];
 let startClick;
 let seed = 0;
 
-!isServer && document.addEventListener('mousedown', e => (startClick = e), false);
-!isServer && document.addEventListener('mouseup', e => {
-    nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
-}, false);
+if (!isServer) {
+    document.addEventListener('mousedown', e => startClick = e, false);
+    document.addEventListener('mouseup', e => {
+        nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
+    }, false);
+}
 
 function createDocumentHandler(el, binding, vnode) {
-    return function (mouseup = {}, mousedown = {}) {
-        if (!vnode ||
+    return function(mouseup = {}, mousedown = {}) {
+        if (
+            !vnode ||
             !vnode.context ||
             !mouseup.target ||
             !mousedown.target ||
@@ -23,14 +26,15 @@ function createDocumentHandler(el, binding, vnode) {
             el === mouseup.target ||
             (vnode.context.popperEl &&
                 (vnode.context.popperEl.contains(mouseup.target) ||
-                    vnode.context.popperEl.contains(mousedown.target)))) return;
+                    vnode.context.popperEl.contains(mousedown.target)))
+        ) {
+            return;
+        }
 
-        if (binding.expression &&
-            el[ctx].methodName &&
-            vnode.context[el[ctx].methodName]) {
+        if (binding.expression && el[ctx].methodName && vnode.context[el[ctx].methodName]) {
             vnode.context[el[ctx].methodName]();
-        } else {
-            el[ctx].bindingFn && el[ctx].bindingFn();
+        } else if (el[ctx].bindingFn) {
+            el[ctx].bindingFn();
         }
     };
 }

@@ -20,8 +20,8 @@
         components: {
             TheHeader,
             TheFooter,
-            TheModal
-        }
+            TheModal,
+        },
     };
 </script>
 

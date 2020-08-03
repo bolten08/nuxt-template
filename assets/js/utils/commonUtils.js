@@ -4,7 +4,7 @@ export function splitThousands(num, separator = ' ') {
         console.warn('[Utils/roundToMillions] Аргумент "num" должен быть Number: ', num);
         return '';
     }
-    let tmp = num.toString().split('.');
+    const tmp = num.toString().split('.');
     let value = tmp[0].replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, separator);
     if (Number(tmp[1])) {
         value += `.${tmp[1]}`;
@@ -65,8 +65,10 @@ export function bytesToSize(bytes) {
     }
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
     const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
-    if (i === 0) return `${bytes} ${sizes[i]}`;
-    return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
+    if (i === 0) {
+        return `${bytes} ${sizes[i]}`;
+    }
+    return `${((bytes / 1024) ** i).toFixed(1)} ${sizes[i]}`;
 }
 
 /* Has filter */
@@ -189,7 +191,7 @@ export function dateToString(date) {
         return '';
     }
 
-    let year = date.getFullYear();
+    const year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
 
@@ -203,11 +205,11 @@ export function dateToString(date) {
 }
 
 export function getCookie(name) {
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.trim().split(';');
-    let value = undefined;
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.trim().split(';');
+    let value = '';
     ca.forEach(item => {
-        let param = item.split('=');
+        const param = item.split('=');
         if (param[0].trim() === name) {
             value = param[1];
         }
@@ -216,8 +218,8 @@ export function getCookie(name) {
 }
 
 export function chunkArray(arr, chunkSize) {
-    let copy = arr.slice(0);
-    let results = [];
+    const copy = arr.slice(0);
+    const results = [];
 
     while (copy.length) {
         results.push(copy.splice(0, chunkSize));
@@ -231,7 +233,7 @@ export function formDataToObject(formData) {
         console.warn('[formDataToObject] wrong FormData');
         return {};
     }
-    let obj = {};
+    const obj = {};
     formData.forEach((value, key) => {
         obj[key] = value;
     });
@@ -239,7 +241,7 @@ export function formDataToObject(formData) {
 }
 
 export function getOffset(el) {
-    let rect = el.getBoundingClientRect();
+    const rect = el.getBoundingClientRect();
 
     return {
         top: rect.top + window.pageYOffset,
@@ -247,10 +249,10 @@ export function getOffset(el) {
     };
 }
 
-//Not stable
+// Not stable
 export function truncText(el, t) {
-    let text = t || el.textContent;
-    let wordArray = text.split(' ');
+    const text = t || el.textContent;
+    const wordArray = text.split(' ');
 
     while (el.scrollHeight > el.clientHeight) {
         wordArray.pop();
@@ -259,14 +261,16 @@ export function truncText(el, t) {
 }
 
 export function isIe() {
-    let ua = process.browser ? window?.navigator?.userAgent : '';
-    let msie = ua.indexOf('MSIE ') > 0 || !!ua.match(/Trident.*rv:11\./);
+    const ua = process.browser ? window?.navigator?.userAgent : '';
+    const msie = ua.indexOf('MSIE ') > 0 || Boolean(ua.match(/Trident.*rv:11\./));
 
     return msie > 0;
 }
 
 export function lockBody() {
-    document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`;
+    document.body.style.paddingRight = `${
+        window.innerWidth - document.documentElement.clientWidth
+    }px`;
     document.body.style.height = '100%';
     document.body.style.overflow = 'hidden';
 }

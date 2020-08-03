@@ -10,14 +10,13 @@
                        :data="options"
                        :visible="isContentVisible"
                        @close="onClose"
-                       @after-leave="afterContentClose">
-            </component>
+                       @after-leave="afterContentClose" />
         </div>
     </transition>
 </template>
 
 <script>
-    import { lockBody, unlockBody } from '../../assets/js/utils/commonUtils';
+    import {lockBody, unlockBody} from '../../assets/js/utils/commonUtils';
 
     export default {
         data() {
@@ -27,14 +26,14 @@
                 newComponent: null,
                 newOptions: null,
                 isOverlayVisible: false,
-                isContentVisible: false
+                isContentVisible: false,
             };
         },
 
         watch: {
             $route() {
                 this.onClose();
-            }
+            },
         },
 
         beforeMount() {
@@ -53,12 +52,15 @@
                     this.newComponent = component;
                     this.newOptions = options || null;
                     this.isContentVisible = false;
+
                     // console.warn('[TheModal] Модальное окно уже открыто');
                 } else {
                     lockBody();
                     this.isOverlayVisible = true;
                     this.component = component;
-                    if (options) this.options = options;
+                    if (options) {
+                        this.options = options;
+                    }
                 }
             },
 
@@ -85,8 +87,8 @@
 
             afterOverlayClose() {
                 unlockBody();
-            }
-        }
+            },
+        },
     };
 </script>
 

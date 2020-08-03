@@ -1,6 +1,11 @@
 <template>
     <div :class="$style.HomePage">
-        Home Page
+        <h1>
+            Home Page
+        </h1>
+        <p>
+            <span>My</span> description
+        </p>
     </div>
 </template>
 
