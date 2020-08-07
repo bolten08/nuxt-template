@@ -12,7 +12,14 @@
     "rules": {
         //Possible Errors
         "no-console": "off",
-        "no-extra-parens": ["warn", "all", {"nestedBinaryExpressions": false}],
+        "no-extra-parens": [
+            "warn",
+            "all",
+            {
+                "nestedBinaryExpressions": false,
+                "ignoreJSX": "all"
+            }
+        ],
         "no-loss-of-precision": "warn",
         "no-promise-executor-return": "warn",
         //Best Practices
@@ -35,7 +42,7 @@
         "no-invalid-this": "warn",
         "no-labels": "warn",
         "no-lone-blocks": "warn",
-        "no-loop-func": "warn",
+        // "no-loop-func": "warn",
         // "no-magic-numbers": [
         //     "warn",
         //     {
@@ -62,11 +69,17 @@
         "no-undef-init": "warn",
         "no-use-before-define": ["warn", {"functions": false, "classes": false}],
         //Stylistic Issues
-        "array-bracket-newline": ["warn", {"multiline": true}],
+        "array-bracket-newline": ["warn", "consistent"],
         "array-bracket-spacing": ["warn", "never"],
         "array-element-newline": ["error", "consistent"],
         "brace-style": ["warn", "1tbs"],
-        "camelcase": ["warn", {"properties": "never"}],
+        // "camelcase": [
+        //     "warn",
+        //     {
+        //         "properties": "never",
+        //         "ignoreImports": true
+        //     }
+        // ],
         "comma-dangle": ["warn", "only-multiline"],
         "comma-spacing": ["warn", {"before": false, "after": true}],
         "comma-style": ["warn", "last"],
@@ -91,18 +104,18 @@
         ],
         "keyword-spacing": ["warn", {"before": true, "after": true}],
         "linebreak-style": ["warn", "unix"],
-        "lines-around-comment": [
-            "warn",
-            {
-                "beforeBlockComment": true,
-                "beforeLineComment": true,
-                "allowBlockStart": true,
-                "allowClassStart": true,
-                "allowObjectStart": true,
-                "allowArrayStart": true
-            }
-        ],
-        "lines-between-class-members": ["warn", "always"],
+        // "lines-around-comment": [
+        //     "warn",
+        //     {
+        //         "beforeBlockComment": true,
+        //         "beforeLineComment": true,
+        //         "allowBlockStart": true,
+        //         "allowObjectStart": true,
+        //         "allowArrayStart": true,
+        //         "allowClassStart": true
+        //     }
+        // ],
+        "lines-between-class-members": ["warn", "always", {"exceptAfterSingleLine": true}],
         "multiline-comment-style": ["warn", "separate-lines"],
         "multiline-ternary": ["warn", "always-multiline"],
         "new-cap": [
@@ -125,20 +138,9 @@
         "no-unneeded-ternary": "warn",
         "no-whitespace-before-property": "warn",
         "nonblock-statement-body-position": ["warn", "beside"],
-        "object-curly-newline": [
-            "warn",
-            {
-                "ObjectExpression": {
-                    "multiline": true,
-                    "minProperties": 1
-                },
-                "ObjectPattern": {"multiline": true},
-                "ImportDeclaration": {"multiline": true},
-                "ExportDeclaration": {"multiline": true}
-            }
-        ],
+        "object-curly-newline": ["warn", {"consistent": true}],
         "object-curly-spacing": ["warn", "never"],
-        "object-property-newline": "warn",
+        "object-property-newline": ["warn", {"allowAllPropertiesOnSameLine": true}],
         "one-var": ["warn", "never"],
         "one-var-declaration-per-line": ["warn", "initializations"],
         "operator-assignment": ["warn", "always"],
@@ -183,13 +185,7 @@
         "rest-spread-spacing": ["warn", "never"],
         "template-curly-spacing": ["warn", "never"],
         //Vue
-        "vue/html-closing-bracket-newline": [
-            "warn",
-            {
-                "singleline": "never",
-                "multiline": "never"
-            }
-        ],
+        "vue/html-closing-bracket-newline": "off",
         "vue/max-attributes-per-line": [
             "warn",
             {
@@ -255,7 +251,8 @@
         {
             "files": ["*.vue"],
             "rules": {
-                "indent": "off"
+                "indent": "off",
+                "class-methods-use-this": "off"
             }
         }
     ]
