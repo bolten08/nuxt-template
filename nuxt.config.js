@@ -1,11 +1,12 @@
-// import path from 'path';
-// import fs from 'fs';
+import path from 'path';
+import fs from 'fs';
 import {plugins} from './config/plugins';
 import {proxy} from './config/proxy';
 
 module.exports = {
     mode: 'universal',
     target: 'server',
+    telemetry: false,
 
     publicRuntimeConfig: {
         proxyUrl: process.env.PROXY_URL,
@@ -19,15 +20,14 @@ module.exports = {
     },
 
     /**
-     * Раскоментить блок ниже, если необходимо локалку запустить по https.
      * В env добавить 2 переменные HTTPS_KEY и HTTPS_CERT, которые являются путями до сертификатов
      */
-    // server: process.env.HTTPS_KEY && process.env.HTTPS_CERT ? {
-    //     https: {
-    //         key: fs.readFileSync(path.resolve(__dirname, process.env.HTTPS_KEY)),
-    //         cert: fs.readFileSync(path.resolve(__dirname, process.env.HTTPS_CERT)),
-    //     },
-    // } : {},
+    server: process.env.HTTPS_KEY && process.env.HTTPS_CERT ? {
+        https: {
+            key: fs.readFileSync(path.resolve(__dirname, process.env.HTTPS_KEY)),
+            cert: fs.readFileSync(path.resolve(__dirname, process.env.HTTPS_CERT)),
+        },
+    } : {},
 
     /**
      * Метатеги, фавиконки и т.п
@@ -148,8 +148,8 @@ module.exports = {
      * В настройках роутера меняет классы для активных ссылок
      */
     router: {
-        linkActiveClass: '_active-link',
-        linkExactActiveClass: '_exact-link',
+        linkActiveClass: 'is-active',
+        linkExactActiveClass: 'is-exact',
     },
 
     /**
@@ -163,9 +163,10 @@ module.exports = {
     build: {
         publicPath: '/n/',
 
-        //analyze: true,
-        /*
-         ** You can extend webpack config here
+        // analyze: true,
+
+        /**
+         * You can extend webpack config here
          */
         postcss: {
             // Add plugin names as key and arguments as value
