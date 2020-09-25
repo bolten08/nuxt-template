@@ -4,7 +4,6 @@ import {plugins} from './config/plugins';
 import {proxy} from './config/proxy';
 
 module.exports = {
-    mode: 'universal',
     target: 'server',
     telemetry: false,
 
