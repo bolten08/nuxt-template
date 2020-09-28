@@ -6,12 +6,23 @@
         <p>
             <span>My</span> description
         </p>
+        <button @click="openModal">
+            Open Modal
+        </button>
     </div>
 </template>
 
 <script>
+    import FormExample1 from '~/components/layout/modals/FormExample1';
+
     export default {
         name: 'HomePage',
+
+        methods: {
+            openModal() {
+                this.$modal.open(FormExample1);
+            }
+        }
     };
 </script>
 

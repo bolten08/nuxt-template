@@ -3,14 +3,18 @@
                 @enter="isContentVisible = true"
                 @after-leave="afterOverlayClose">
         <div v-if="isOverlayVisible"
-             :class="[$style.overlay, options && options.classList ? options.classList: '']"
+             :class="[$style.overlay, classes]"
              @click.self="onClose">
 
-            <component :is="component"
-                       :data="options"
-                       :visible="isContentVisible"
-                       @close="onClose"
-                       @after-leave="afterContentClose" />
+            <component
+                :is="component"
+                :data="options"
+                :visible="isContentVisible"
+                @close="onClose"
+                @after-enter="isOverflowing = true"
+                @before-leave="isOverflowing = false"
+                @after-leave="afterContentClose"
+            />
         </div>
     </transition>
 </template>
@@ -27,7 +31,19 @@
                 newOptions: null,
                 isOverlayVisible: false,
                 isContentVisible: false,
+                isOverflowing: false,
             };
+        },
+
+        computed: {
+            classes() {
+                return [
+                    this.options && this.options.className ? this.options.className : '',
+                    {
+                        [this.$style._overflow]: this.isOverflowing,
+                    },
+                ];
+            },
         },
 
         watch: {
@@ -52,7 +68,6 @@
                     this.newComponent = component;
                     this.newOptions = options || null;
                     this.isContentVisible = false;
-
                     // console.warn('[TheModal] Модальное окно уже открыто');
                 } else {
                     lockBody();
@@ -69,6 +84,8 @@
             },
 
             afterContentClose() {
+                this.isOverflowing = false;
+
                 if (this.newComponent) {
                     this.component = this.newComponent;
                     this.options = this.newOptions;
@@ -100,9 +117,13 @@
         z-index: 98;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, .7);
+        background-color: rgba(0, 0, 0, .6);
         overflow: hidden;
         -webkit-overflow-scrolling: touch;
+
+        &._overflow {
+            overflow-y: auto;
+        }
 
         &:global(.overlay-appear-enter-active) {
             transition: all .4s;
@@ -115,10 +136,6 @@
 
         &:global(.overlay-appear-enter) {
             opacity: 0;
-        }
-
-        &:global(.is-article) {
-            overflow-y: auto;
         }
     }
 </style>

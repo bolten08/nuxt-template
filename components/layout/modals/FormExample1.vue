@@ -9,10 +9,10 @@
                     Form Example 1
                 </h5>
 
-                <CButton :class="$style.btn"
-                         @click="openModal">
+                <button :class="$style.btn"
+                        @click="openModal">
                     Open Example 2
-                </CButton>
+                </button>
             </div>
         </div>
     </transition>

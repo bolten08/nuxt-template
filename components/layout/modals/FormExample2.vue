@@ -1,6 +1,7 @@
 <template>
     <transition name="form-appear"
                 @after-enter="$emit('after-enter')"
+                @before-leave="$emit('before-leave')"
                 @after-leave="$emit('after-leave')">
         <div v-if="visible"
              :class="$style.FormExample2">
@@ -29,9 +30,13 @@
     .FormExample2 {
         position: absolute;
         top: 0;
-        left: 50%;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        min-height: 100%;
         padding: 16px;
-        transform: translate(-50%, 0);
         pointer-events: none;
 
         &:global(.form-appear-enter-active) {
@@ -44,7 +49,7 @@
 
         &:global(.form-appear-enter),
         &:global(.form-appear-leave-to) {
-            transform: translate(-50%, 80px);
+            transform: translate(0, 80px);
             opacity: 0;
         }
     }
