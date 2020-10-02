@@ -3,6 +3,16 @@
 @import './common/text';
 @import './common/transitions';
 
+.page {
+    padding-top: $header-h;
+}
+
+.container {
+    max-width: 1360px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .lazy-image {
     position: absolute;
     left: 0;
@@ -13,7 +23,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity .3s ease .1s;
+    transition: opacity 0.3s ease 0.1s;
 
     &[lazy='loaded'] {
         opacity: 1;

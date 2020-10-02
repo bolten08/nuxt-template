@@ -1,5 +1,3 @@
-import Vue from 'vue';
-
 const Plugin = {
     install(Vue) {
         if (Vue.prototype.$modal) {
@@ -26,4 +24,4 @@ const Plugin = {
     },
 };
 
-Vue.use(Plugin);
+export default Plugin;
