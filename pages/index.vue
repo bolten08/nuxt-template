@@ -1,14 +1,17 @@
 <template>
-    <div :class="$style.HomePage">
-        <h1>
-            Home Page
-        </h1>
-        <p>
-            <span>My</span> description
-        </p>
-        <button @click="openModal">
-            Open Modal
-        </button>
+    <div :class="$style.HomePage"
+         class="page">
+        <div class="container">
+            <h1>
+                Home Page
+            </h1>
+            <p>
+                <span>My</span> description
+            </p>
+            <button @click="openModal">
+                Open Modal
+            </button>
+        </div>
     </div>
 </template>
 
@@ -21,8 +24,8 @@
         methods: {
             openModal() {
                 this.$modal.open(FormExample1);
-            }
-        }
+            },
+        },
     };
 </script>
 

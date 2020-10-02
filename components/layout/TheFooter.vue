@@ -1,8 +1,11 @@
 <template>
     <footer :class="$style.TheFooter">
-        The Footer
+        <div :class="$style.wrap"
+             class="container">
+            The Footer
 
-        <LogoIda :class="$style.ida" />
+            <LogoIda :class="$style.ida" />
+        </div>
     </footer>
 </template>
 
@@ -18,9 +21,13 @@
 
 <style lang="scss" module>
     .TheFooter {
+        background-color: rgba(grey, 0.4);
+    }
+
+    .wrap {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
         height: $footer-h;
     }
 
