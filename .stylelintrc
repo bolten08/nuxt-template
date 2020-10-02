@@ -48,6 +48,6 @@
                 baseIndentLevel: 1
             }
         ],
-        number-leading-zero: "never"
+        number-leading-zero: null
     }
 }

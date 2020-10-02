@@ -8,7 +8,9 @@
 </template>
 
 <script>
-    export default {};
+    export default {
+        name: 'TheHeader',
+    };
 </script>
 
 <style lang="scss" module>
@@ -18,7 +20,7 @@
         left: 0;
         z-index: 15;
         width: 100%;
-        background-color: rgba(grey, .4);
+        background-color: rgba(grey, 0.4);
     }
 
     .wrap {
